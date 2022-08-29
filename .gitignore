@@ -1,5 +1,5 @@
 /server/node_modules
 /client/node_modules
 /client/api
-/client/src/token
+/client/src/components/token
 /client-1
