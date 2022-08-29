@@ -1,0 +1,36 @@
+.list-bar-wrapper{
+    box-shadow: 0 4px 4px rgba(0,0,0,0.5);
+    width: 100%;
+    padding: 10px;
+    position:-webkit-sticky;
+    position:sticky;
+    top: 0;
+}
+
+.list-bar{
+    color: #000;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.list-bar:hover{
+    cursor: pointer;
+    background-color: rgb(211, 207, 207);
+    color: #000;
+}
+
+.list-bar--active{
+    font-weight: 700;
+    color: #006edc;
+}
+
+.list-bar-link{
+    text-decoration: none;
+    color: #000;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+

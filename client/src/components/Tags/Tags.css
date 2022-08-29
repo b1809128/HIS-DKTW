@@ -1,0 +1,29 @@
+.tags {
+  width: 100%;
+  height: 140px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.tags-content{
+  width:90%;
+}
+
+.tags-title {
+  color: #333;
+}
+
+.tags-dataNumber {
+  color: #006edc;
+  font-size: 2.4rem;
+  font-weight: 600;
+}
+
+.tags-holder {
+  cursor: pointer;
+  float: right;
+  font-size: 1.2rem;
+}

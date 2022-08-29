@@ -1,0 +1,19 @@
+.list-container{
+    margin-top:40px;
+  }
+  .list-item{
+    display:flex;
+    align-items: center;
+    background-color: #FFD2D2;
+    padding:0px 20px;
+    margin-top:15px;
+    cursor:move;
+    
+  }
+  .list-item i{
+    margin-right:20px;
+    font-size: 30px;
+  }
+  h3{
+    font-size: 30px;
+  }

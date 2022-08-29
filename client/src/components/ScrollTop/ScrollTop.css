@@ -1,0 +1,43 @@
+.goto-top:link,
+.goto-top:visited {
+  position: fixed;
+  right: 2%;
+  bottom: 5%;
+  padding: 0.5rem 1rem;
+  border-radius: .5rem;
+  background-color: #006edc;
+  visibility: hidden;
+  cursor: pointer;
+  transition: 0.3s;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+.show-top:link,
+.show-top:visited {
+  visibility: visible;
+  z-index: 1999;
+}
+
+@keyframes bounce {
+  0% {
+    transform: scale(0.5);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  0% {
+    transform: scale(1);
+  }
+}
+
+.goto-top svg {
+  width: .5rem;
+  height: .5rem;
+  fill: #fff;
+}
+
+.goto-top:hover {
+  opacity: 0.5;
+}
