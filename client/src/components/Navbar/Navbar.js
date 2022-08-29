@@ -37,7 +37,7 @@ function NavbarComponent() {
           <Row>
             <Navbar.Collapse className="justify-content-end">
               <Navbar.Text>
-                Signed in as: <a href="#login">Admin</a>
+                <span>Signed in as:</span> <a href="/sign-in">Admin</a>
               </Navbar.Text>
               {/* <FiLogOut className="navbar-logout" /> */}
             </Navbar.Collapse>

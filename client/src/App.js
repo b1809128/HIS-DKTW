@@ -13,7 +13,10 @@ import Table from "./pages/Table";
 import Configure from "./pages/Configure";
 import Unit from "./pages/Unit";
 import Receipt from "./pages/Receipt";
+import Login from "./pages/Login";
+import { useCookies } from "react-cookie";
 function App() {
+  const [token] = useCookies("access-token");
   const layOutArray = [
     { size: 2, component: <ListBar /> },
     {
@@ -45,7 +48,7 @@ function App() {
   ];
 
   const getLayOutLocal = JSON.parse(localStorage.getItem("layOutApp"));
-  // console.log(getLayOutLocal);
+
   const setLayOut = () => {
     let newLayOut = [];
 
@@ -63,7 +66,6 @@ function App() {
     }
     return newLayOut;
   };
-  // console.log(setLayOut());
 
   const [listBarComponent, setListBarComponent] = useState(
     getLayOutLocal ? setLayOut() : layOutArray
@@ -102,28 +104,34 @@ function App() {
 
   return (
     <Container>
-      <Row>
-        <Col sm={12}>
-          <NavbarComponent />
-        </Col>
-      </Row>
-      <Row>
-        {listBarComponent.map((data, index) => {
-          return (
-            <Col
-              key={index}
-              draggable
-              onDragStart={(e) => (dragItems.current = index)}
-              onDragEnter={(e) => (dragOverItems.current = index)}
-              onDragEnd={handleSortNavbar}
-              onDragOver={(e) => e.preventDefault()}
-              sm={data.size}
-            >
-              {data.component}
+      {!token["access-token"] ? (
+        <Login />
+      ) : (
+        <>
+          <Row>
+            <Col sm={12}>
+              <NavbarComponent />
             </Col>
-          );
-        })}
-      </Row>
+          </Row>
+          <Row>
+            {listBarComponent.map((data, index) => {
+              return (
+                <Col
+                  key={index}
+                  draggable
+                  onDragStart={(e) => (dragItems.current = index)}
+                  onDragEnter={(e) => (dragOverItems.current = index)}
+                  onDragEnd={handleSortNavbar}
+                  onDragOver={(e) => e.preventDefault()}
+                  sm={data.size}
+                >
+                  {data.component}
+                </Col>
+              );
+            })}
+          </Row>
+        </>
+      )}
     </Container>
   );
 }

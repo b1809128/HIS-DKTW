@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import Swal from "sweetalert2";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 function Configure() {
   // const history = useHistory();
 
@@ -18,7 +18,7 @@ function Configure() {
         localStorage.removeItem("tagItems");
         localStorage.removeItem("layOutApp");
         Swal.fire("Saved!", "", "success");
-        <Redirect to="/" />;
+        <Navigate to="/" />;
       } else if (result.isDenied) {
         Swal.fire("Changes are not saved", "", "info");
       }

@@ -3,30 +3,30 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import React, { useState, useEffect } from "react";
 import { Doughnut } from "react-chartjs-2";
 import "./Chart.css";
-import { token, apiStatisticDaily } from "../token/authorize";
+import { apiStatisticDaily } from "../token/authorize";
+import {useCookies} from "react-cookie"
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 function DoughnutChart() {
   const [apiData, setApiData] = useState([]);
+  const [token] = useCookies(["access-token"]);
   useEffect(() => {
     const getAPI = async () => {
       await axios
-        .get(apiStatisticDaily, { headers: { token: token } })
+        .get(apiStatisticDaily, { headers: { token: token['access-token'] } })
         .then((res) => setApiData(res.data.value.elements))
         .catch((err) => console.log(err));
     };
     getAPI();
-  }, []);
+  }, [token]);
   // console.log(apiData.elements);
   let newArray = [];
   for (let i = 0; i < apiData.length; i++) {
     for (let j = 0; j < apiData[i].items.length; j++) {
       newArray.push(apiData[i].items[j]);
     }
-    // newArray.push(apiData[i].items)
   }
 
-  // console.log(newArray);
   let data = {
     labels: newArray.map((data) => data.display),
     datasets: [

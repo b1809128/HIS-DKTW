@@ -1,11 +1,7 @@
-export const token =
-  "HyPAd5tAWWVmkjiReunF6OZ7PjlqYlq4jOLZ2wN7ogzUV3FFkse3T86JE0Crq6B2ifUQ/JG4bImu6Dgf+if6H5cU3SJ841kZ8WSZJ4sJPEczVn73Tr2EteYciEpnf6R7H0QdZZxdA1cCFxvTCDVJcZn7J9qmiHXgAm/ajsw4I5U=";
-
 export const apiStatisticDaily =
   "api/statistic/daily/eyJ0eXBlIjogIm5vd2FkYXlzXzAxIiwgImZyb20iOiAiMjAyMi0wNi0wMSIsICJ0byI6ICIyMDIwLTA3LTMxIn0=";
 
-export const apiToken =
-  "api/user/rdparty/login?user=test_rp&pass=123&rd_key=DTDBIQ4iOV559N21kJkQIwsZhnZbsARFkC2DK6WZzEC1cDy1Y5sWGGtZryV9kiv2nxNaYbFqcNEMXh1ws6Maf97jS/gvzldE2SnsFq4cg8Tdo37D0Pq70wma9NNvwxDkbV0D8gNyHhG16cbxe7BzJZHtPMwAkIg5GAV87zNmJGI=";
+export const apiLoginGetToken = "api/user/rdparty/login";
 
 export const rd_key =
   "DTDBIQ4iOV559N21kJkQIwsZhnZbsARFkC2DK6WZzEC1cDy1Y5sWGGtZryV9kiv2nxNaYbFqcNEMXh1ws6Maf97jS/gvzldE2SnsFq4cg8Tdo37D0Pq70wma9NNvwxDkbV0D8gNyHhG16cbxe7BzJZHtPMwAkIg5GAV87zNmJGI=";
