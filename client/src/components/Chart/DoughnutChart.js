@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Doughnut } from "react-chartjs-2";
 import "./Chart.css";
 import { apiStatisticDaily } from "../token/authorize";
-import {useCookies} from "react-cookie"
+import { useCookies } from "react-cookie";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 function DoughnutChart() {
@@ -13,13 +13,13 @@ function DoughnutChart() {
   useEffect(() => {
     const getAPI = async () => {
       await axios
-        .get(apiStatisticDaily, { headers: { token: token['access-token'] } })
+        .get(apiStatisticDaily, { headers: { token: token["access-token"] } })
         .then((res) => setApiData(res.data.value.elements))
         .catch((err) => console.log(err));
     };
     getAPI();
   }, [token]);
-  // console.log(apiData.elements);
+  // console.log(apiData);
   let newArray = [];
   for (let i = 0; i < apiData.length; i++) {
     for (let j = 0; j < apiData[i].items.length; j++) {
