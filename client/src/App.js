@@ -15,6 +15,7 @@ import Unit from "./pages/Unit";
 import Receipt from "./pages/Receipt";
 import Login from "./pages/Login";
 import { useCookies } from "react-cookie";
+import ChartAPI from "./pages/ChartAPI";
 function App() {
   const [token] = useCookies("access-token");
   const layOutArray = [
@@ -37,6 +38,9 @@ function App() {
           </Routes>
           <Routes>
             <Route path="/Drag" element={<DragList />} />
+          </Routes>
+          <Routes>
+            <Route path="/ChartAPI" element={<ChartAPI />} />
           </Routes>
           <Routes>
             <Route path="/Configure" element={<Configure />} />

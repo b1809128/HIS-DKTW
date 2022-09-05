@@ -8,14 +8,14 @@ function Login() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const handleSubmitLogin = async () => {
-    const res = await axios.get(`${apiLoginGetToken}`, {
+    const res = await axios.get(apiLoginGetToken, {
       headers: {
         user: userName,
         password: password,
         rd_key: rd_key,
       },
     });
-    setToken("access-token", res.data.value.token, { path: "/", maxAge: 300 });
+    setToken("access-token", res.data.value.token, { path: "/", maxAge: 600 });
     if (res.data.value.token) {
       // (() => {
       window.location.replace("/");

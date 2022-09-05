@@ -104,17 +104,20 @@ function Main() {
               "http://localhost:5000/api/auth"
             );
             setUserData(hubAuthData.data);
-          } else if (message.code === "addMedical") {
+          }
+          if (message.code === "addMedical") {
             const hubMedicalData = await axios.get(
               "http://localhost:5000/api/medical"
             );
             setMedicalData(hubMedicalData.data);
-          } else if (message.code === "addSupplier") {
+          }
+          if (message.code === "addSupplier") {
             const hubSupplierData = await axios.get(
               "http://localhost:5000/api/supplier"
             );
             setSupplierData(hubSupplierData.data);
-          } else if (message.code === "addUnit") {
+          }
+          if (message.code === "addUnit") {
             const hubUnitData = await axios.get(
               "http://localhost:5000/api/unit"
             );

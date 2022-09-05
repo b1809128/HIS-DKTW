@@ -3,7 +3,7 @@ import Row from "react-bootstrap/Row";
 import "./ListBar.css";
 function ListBar() {
   let listBarArray = ["Medical", "Supplier"];
-  let pageArray = ["Unit", "Receipt", "Table", "Drag", "Configure", "About"];
+  let pageArray = ["Unit", "Receipt", "Table", "Drag", "ChartAPI", "Configure", "About"];
 
   //TODO: Set active class
   const urlStringFlash = window.location.pathname.split("/");

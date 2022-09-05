@@ -13,7 +13,11 @@ function DoughnutChart() {
   useEffect(() => {
     const getAPI = async () => {
       await axios
-        .get(apiStatisticDaily, { headers: { token: token["access-token"] } })
+        .get(apiStatisticDaily, {
+          headers: {
+            token: token["access-token"],
+          },
+        })
         .then((res) => setApiData(res.data.value.elements))
         .catch((err) => console.log(err));
     };
