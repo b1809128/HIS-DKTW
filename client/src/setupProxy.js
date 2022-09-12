@@ -22,4 +22,11 @@ module.exports = function (app) {
       changeOrigin: true,
     })
   );
+  app.use(
+    "/api/system/statistics/*",
+    createProxyMiddleware({
+      target: "http://14.241.182.251:57195",
+      changeOrigin: true,
+    })
+  );
 };

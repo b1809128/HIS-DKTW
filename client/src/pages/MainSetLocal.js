@@ -14,7 +14,6 @@ import ReceiptTable from "../components/Table/ReceiptTable";
 
 import * as signalR from "@microsoft/signalr";
 import axios from "axios";
-
 /**
  * 
  * @UsingSignalRhere     
@@ -30,6 +29,7 @@ import axios from "axios";
         console.log(name, message);
       });
     })();
+    
  */
 
 function Main() {
@@ -37,23 +37,6 @@ function Main() {
   const [supplierData, setSupplierData] = useState([]);
   const [unitData, setUnitData] = useState([]);
   const [userData, setUserData] = useState([]);
-
-  //TODO: Tags change content
-  const [tagItems, setTagItems] = useState([]);
-
-  //TODO: Chart change content
-  const [calendarItems, setCalendarItems] = useState([
-    <DoughnutChart />,
-    <CalendarComponent />,
-  ]);
-
-  const [chartItems, setChartItems] = useState([
-    <LineChart />,
-    <ColumnChart />,
-  ]);
-
-  let dragItems = useRef(null);
-  let dragOverItems = useRef(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -79,55 +62,62 @@ function Main() {
       setUnitData(getUnitData.data);
       setUserData(getUserData.data);
 
-      let nameTags = getUserData.data[0].layout.tags;
+      let numberTags = [
+        medicalData.length,
+        supplierData.length,
+        unitData.length,
+        userData.length,
+      ];
+
+      let nameTags = ["Medical", "Supplier", "Unit", "User"];
+
       let listBarArray = [];
 
       for (let i = 0; i < nameTags.length; i++) {
-        if (nameTags[i] === "Medical") {
-          listBarArray[i] = { title: nameTags[i], number: medicalData.length };
-        } else if (nameTags[i] === "Supplier") {
-          listBarArray[i] = { title: nameTags[i], number: supplierData.length };
-        } else if (nameTags[i] === "Unit") {
-          listBarArray[i] = { title: nameTags[i], number: unitData.length };
-        } else if (nameTags[i] === "User") {
-          listBarArray[i] = { title: nameTags[i], number: userData.length };
-        }
+        listBarArray[i] = { title: nameTags[i], number: numberTags[i] };
       }
-      setTagItems(listBarArray);
+      setTagItems(
+        JSON.parse(localStorage.getItem("tagItems"))
+          ? JSON.parse(localStorage.getItem("tagItems"))
+          : listBarArray
+      );
     };
 
     (async () => {
       const newConnection = new signalR.HubConnectionBuilder()
-        .withUrl("http://14.241.182.251:55078/chathub") // Ensure same as BE
+        .withUrl("http://14.241.182.251:55078/chathub", {
+          skipNegotiation: true,
+          transport: signalR.HttpTransportType.WebSockets,
+        }) // Ensure same as BE
         .withAutomaticReconnect()
         .build();
       await newConnection.start();
 
       // Let's also setup our receiving method...
-      newConnection.on("ReceiveMessage", async (dataSignal) => {
-        // console.log(data);
-        if (!dataSignal) {
+      newConnection.on("ReceiveMessage", async (name, message) => {
+        // console.log(name, message);
+        if (!message) {
           await getAPI();
         } else {
-          if (dataSignal.message.code === "addAuth") {
+          if (message.code === "addAuth") {
             const hubAuthData = await axios.get(
               "http://localhost:5000/api/auth"
             );
             setUserData(hubAuthData.data);
           }
-          if (dataSignal.message.code === "addMedical") {
+          if (message.code === "addMedical") {
             const hubMedicalData = await axios.get(
               "http://localhost:5000/api/medical"
             );
             setMedicalData(hubMedicalData.data);
           }
-          if (dataSignal.message.code === "addSupplier") {
+          if (message.code === "addSupplier") {
             const hubSupplierData = await axios.get(
               "http://localhost:5000/api/supplier"
             );
             setSupplierData(hubSupplierData.data);
           }
-          if (dataSignal.message.code === "addUnit") {
+          if (message.code === "addUnit") {
             const hubUnitData = await axios.get(
               "http://localhost:5000/api/unit"
             );
@@ -145,7 +135,22 @@ function Main() {
     userData.length,
   ]);
 
-  // console.log(userData[0].layout.tags);
+  //TODO: Tags change content
+  const [tagItems, setTagItems] = useState([]);
+
+  //TODO: Chart change content
+  const [calendarItems, setCalendarItems] = useState([
+    <DoughnutChart />,
+    <CalendarComponent />,
+  ]);
+
+  const [chartItems, setChartItems] = useState([
+    <LineChart />,
+    <ColumnChart />,
+  ]);
+
+  let dragItems = useRef(null);
+  let dragOverItems = useRef(null);
 
   const handleSortTags = () => {
     let duplicateItems = [...tagItems];
@@ -154,18 +159,8 @@ function Main() {
 
     dragItems = null;
     dragOverItems = null;
+    localStorage.setItem("tagItems", JSON.stringify(duplicateItems));
     setTagItems(duplicateItems);
-    updateTags(duplicateItems);
-  };
-
-  const updateTags = async (duplicateItems) => {
-    await axios.patch("http://localhost:5000/api/auth/usr1", {
-      layout: {
-        tags: duplicateItems.map((data) => data.title),
-        chart: ["STAVW_0001", "STAVW_0002", "STAVW_0003", "STAVW_0004"],
-        content: [2, 10],
-      },
-    });
   };
 
   const handleSortCalendar = () => {

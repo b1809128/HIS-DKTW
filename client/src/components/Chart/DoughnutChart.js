@@ -7,8 +7,9 @@ import { apiStatisticDaily } from "../token/authorize";
 import { useCookies } from "react-cookie";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-function DoughnutChart() {
+function DoughnutChart({ height }) {
   const [apiData, setApiData] = useState([]);
+  const [title, setTitle] = useState("");
   const [token] = useCookies(["access-token"]);
   useEffect(() => {
     const getAPI = async () => {
@@ -18,7 +19,10 @@ function DoughnutChart() {
             token: token["access-token"],
           },
         })
-        .then((res) => setApiData(res.data.value.elements))
+        .then((res) => {
+          setApiData(res.data.value.elements);
+          setTitle(res.data.value.display);
+        })
         .catch((err) => console.log(err));
     };
     getAPI();
@@ -60,8 +64,9 @@ function DoughnutChart() {
     ],
   };
   return (
-    <div className="chart-div">
+    <div className="chart-div" style={{ height: height }}>
       <Doughnut data={data} />
+      <p style={{ textAlign: "center" }}>Biểu đồ {title}</p>
     </div>
   );
 }

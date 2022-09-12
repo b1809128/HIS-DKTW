@@ -16,7 +16,6 @@
     "axios": "^0.27.2",
     "bootstrap": "^5.2.0",
     "chart.js": "^3.9.1",
-    "pouchdb": "^7.3.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
     "react-calendar": "^3.7.0",
