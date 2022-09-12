@@ -7,13 +7,7 @@ let connection = new signalR.HubConnectionBuilder()
 connection.start();
 connection.on("ReceiveMessage", (dataReceive, message) => {
   console.log(dataReceive, message);
-  // return dataReceive, message;
 });
-// exports.startHubConnection = () => {
-//   connection.start();
-// };
-
-exports.ReceiveMessage = () => {};
 
 exports.SendMessage = (id, message) => {
   connection.send("SendMessage", id, message);

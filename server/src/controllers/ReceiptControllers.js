@@ -1,5 +1,5 @@
 const Receipt = require("../models/ReceiptModel");
-const vasdHubConnect = require("../../signalR/vasdRequire")
+const vasdHubConnect = require("../../signalR/vasdRequire");
 
 exports.getReceiptController = async (req, res) => {
   try {
