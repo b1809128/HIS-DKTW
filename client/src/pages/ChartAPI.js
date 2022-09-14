@@ -14,7 +14,7 @@ function ChartAPI() {
       const res = await axios.get(apiStatisticChartConfig, {
         headers: {
           token:
-            "DDnsj7zXrM+9O3kbExmb/+vLLWJT7FIZpnWMDrNABLp7iJ+QlpKb8HPx79FeuSTTJnxgLHg2PPq5zWBmmkkrWEZIoO+feS1XcctW0HHFUbQax029MscJfQwO+fuQwjwGqqbMUbc9p9yXS+bGGfA9SMIMFl2cAkOJahrSMygC/ak=",
+            "cotI/T+E++ZkSS/GUcJ5ouDk9xSq41QigVyd0Jt0IkOR/Vc0QCzh9WAwaNscPCDe6O3Ne61n9a0SWjFUcMeyGRT9/qAj7Yn4x0Y8Ikm5CYNDyD2oKdtRJZ6TRqEnkhlCVxzv8qPxZmS7fxCIUJ08q5paSO2Ph99IbPeaxizKekI=",
         },
       });
       setChartApi(res.data.value);

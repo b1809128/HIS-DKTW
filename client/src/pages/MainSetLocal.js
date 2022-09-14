@@ -19,7 +19,10 @@ import axios from "axios";
  * @UsingSignalRhere     
     (async () => {
       const newConnection = new HubConnectionBuilder()
-        .withUrl("http://14.241.182.251:55078/chathub") // Ensure same as BE
+        .withUrl("http://14.241.182.251:55078/chathub", {
+          skipNegotiation: true,
+          transport: signalR.HttpTransportType.WebSockets,
+        }) // Ensure same as BE
         .withAutomaticReconnect()
         .build();
       await newConnection.start();

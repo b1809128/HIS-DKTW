@@ -2,6 +2,7 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import Swal from "sweetalert2";
 import { Navigate } from "react-router-dom";
+import axios from "axios";
 function Configure() {
   // const history = useHistory();
 
@@ -15,8 +16,7 @@ function Configure() {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        localStorage.removeItem("tagItems");
-        localStorage.removeItem("layOutApp");
+        axios.patch("http://localhost:5000/api/auth/config/reset/usr1");
         Swal.fire("Saved!", "", "success");
         <Navigate to="/" />;
       } else if (result.isDenied) {

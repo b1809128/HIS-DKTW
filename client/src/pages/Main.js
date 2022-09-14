@@ -20,7 +20,10 @@ import axios from "axios";
  * @UsingSignalRhere     
     (async () => {
       const newConnection = new HubConnectionBuilder()
-        .withUrl("http://14.241.182.251:55078/chathub") // Ensure same as BE
+        .withUrl("http://14.241.182.251:55078/chathub", {
+          skipNegotiation: true,
+          transport: signalR.HttpTransportType.WebSockets,
+        }) // Ensure same as BE
         .withAutomaticReconnect()
         .build();
       await newConnection.start();
@@ -98,36 +101,39 @@ function Main() {
 
     (async () => {
       const newConnection = new signalR.HubConnectionBuilder()
-        .withUrl("http://14.241.182.251:55078/chathub") // Ensure same as BE
+        .withUrl("http://14.241.182.251:55078/chathub", {
+          skipNegotiation: true,
+          transport: signalR.HttpTransportType.WebSockets,
+        }) // Ensure same as BE
         .withAutomaticReconnect()
         .build();
       await newConnection.start();
 
       // Let's also setup our receiving method...
-      newConnection.on("ReceiveMessage", async (dataSignal) => {
+      newConnection.on("ReceiveMessage", async (name, message) => {
         // console.log(data);
-        if (!dataSignal) {
+        if (!message) {
           await getAPI();
         } else {
-          if (dataSignal.message.code === "addAuth") {
+          if (message.code === "addAuth") {
             const hubAuthData = await axios.get(
               "http://localhost:5000/api/auth"
             );
             setUserData(hubAuthData.data);
           }
-          if (dataSignal.message.code === "addMedical") {
+          if (message.code === "addMedical") {
             const hubMedicalData = await axios.get(
               "http://localhost:5000/api/medical"
             );
             setMedicalData(hubMedicalData.data);
           }
-          if (dataSignal.message.code === "addSupplier") {
+          if (message.code === "addSupplier") {
             const hubSupplierData = await axios.get(
               "http://localhost:5000/api/supplier"
             );
             setSupplierData(hubSupplierData.data);
           }
-          if (dataSignal.message.code === "addUnit") {
+          if (message.code === "addUnit") {
             const hubUnitData = await axios.get(
               "http://localhost:5000/api/unit"
             );
@@ -158,12 +164,13 @@ function Main() {
     updateTags(duplicateItems);
   };
 
-  const updateTags = async (duplicateItems) => {
-    await axios.patch("http://localhost:5000/api/auth/usr1", {
+  // console.log(userData[0].layout.content);
+  const updateTags = (arrChange) => {
+    axios.patch("http://localhost:5000/api/auth/config/set/usr1", {
       layout: {
-        tags: duplicateItems.map((data) => data.title),
-        chart: ["STAVW_0001", "STAVW_0002", "STAVW_0003", "STAVW_0004"],
-        content: [2, 10],
+        tags: arrChange.map((data) => data.title),
+        chart: userData[0].layout.chart,
+        content: userData[0].layout.content,
       },
     });
   };
