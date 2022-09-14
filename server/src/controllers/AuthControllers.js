@@ -19,23 +19,45 @@ exports.getAuthControllerById = async (req, res) => {
   }
 };
 
-exports.updateAuthControllerById = async (req, res) => {
-  try {
-    const usr = await Auth.updateOne(
-      { codeAuth: req.params.codeAuth },
-      {
-        // $set: {
-        //   layout: { tags: ["User", "Unit", "Medical", "Supplier"] },
-        // },
-        $set: req.body,
-      }
-    );
-    if (usr) {
-      res.status(200).json({ message: "update success" });
+exports.updateLayoutAuthControllerById = async (req, res) => {
+  const usr = await Auth.updateOne(
+    { codeAuth: req.params.codeAuth },
+    {
+      $set: req.body,
     }
-  } catch (error) {
-    res.status(404).send(error);
-  }
+  );
+  let message = {
+    code: "addAuth",
+    name: "_addUser",
+    receiver: "backend",
+    content: { code: "_write" },
+  };
+  vasdHubConnect.SendMessage("1809128", message);
+  res.status(200).json({ message: "update success" });
+};
+
+exports.updateResetConfigAuthControllerById = async (req, res) => {
+  const usr = await Auth.updateOne(
+    { codeAuth: req.params.codeAuth },
+    {
+      $set: {
+        layout: {
+          tags: ["Medical", "Supplier", "Unit", "User"],
+          chart: ["STAVW_0001", "STAVW_0002", "STAVW_0003", "STAVW_0004"],
+          content: [2, 10],
+        },
+      },
+    }
+  );
+
+  let message = {
+    code: "addAuth",
+    name: "_addUser",
+    receiver: "backend",
+    content: { code: "_write" },
+  };
+  vasdHubConnect.SendMessage("1809128", message);
+  res.status(200).json({ message: "update success" });
 };
 
 exports.createAuthController = (req, res) => {

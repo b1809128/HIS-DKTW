@@ -11,6 +11,13 @@ router.post(
   auththorize.basicAuthorization,
   AuthControllers.loginAuthController
 );
-router.patch("/:codeAuth", AuthControllers.updateAuthControllerById);
+router.patch(
+  "/config/set/:codeAuth",
+  AuthControllers.updateLayoutAuthControllerById
+);
+router.patch(
+  "/config/reset/:codeAuth",
+  AuthControllers.updateResetConfigAuthControllerById
+);
 
 module.exports = router;

@@ -9,9 +9,11 @@ const dataToBase64 = {
   value: "sta_0001",
 };
 
+const configKind = { kind: "user_gui", user_id: 1 };
+
 const parseToBase64 = (params) => {
   let stringBase64 = buffer.from(JSON.stringify(params)).toString("base64");
   return stringBase64;
 };
 
-console.log(parseToBase64(system57195));
+console.log(parseToBase64(configKind));
