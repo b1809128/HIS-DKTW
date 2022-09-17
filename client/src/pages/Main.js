@@ -82,7 +82,7 @@ function Main() {
       setUnitData(getUnitData.data);
       setUserData(getUserData.data);
 
-      let nameTags = getUserData.data[0].layout.tags;
+      let nameTags = getUserData.data[0].tags;
       let listBarArray = [];
 
       for (let i = 0; i < nameTags.length; i++) {
@@ -151,8 +151,6 @@ function Main() {
     userData.length,
   ]);
 
-  // console.log(userData[0].layout.tags);
-
   const handleSortTags = () => {
     let duplicateItems = [...tagItems];
     let draggedItemsContent = duplicateItems.splice(dragItems.current, 1)[0];
@@ -164,14 +162,9 @@ function Main() {
     updateTags(duplicateItems);
   };
 
-  // console.log(userData[0].layout.content);
   const updateTags = (arrChange) => {
     axios.patch("http://localhost:5000/api/auth/config/set/usr1", {
-      layout: {
-        tags: arrChange.map((data) => data.title),
-        chart: userData[0].layout.chart,
-        content: userData[0].layout.content,
-      },
+      tags: arrChange.map((data) => data.title),
     });
   };
 

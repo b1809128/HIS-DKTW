@@ -6,6 +6,8 @@ import ColumnChart from "../components/Chart/ColumnChart";
 import DoughnutChart from "../components/Chart/DoughnutChart";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
+import ChartCustom from "../components/Chart/ChartCustom";
+import Bar from "../components/Chart/Bar";
 function ChartAPI() {
   const [chartApi, setChartApi] = useState([]);
   const [token] = useCookies("access-token");
@@ -24,8 +26,50 @@ function ChartAPI() {
   }, [token]);
 
   // console.log(chartApi);
+  const data = [
+    { name: "Phone", expense: 151 },
+    { name: "Electricity", expense: 100 },
+    { name: "Car", expense: 5 },
+    { name: "House", expense: 43 },
+    { name: "Food", expense: 56 },
+    { name: "Leisure", expense: 182 },
+  ];
+  const [expensesData] = useState(data);
+  const maxExpense = 200;
+  const chartHeight = maxExpense + 20;
+  const barWidth = 50;
+  const barMargin = 30;
+  const numberofBars = expensesData.length;
+  let width = numberofBars * (barWidth + barMargin);
+
+  // Calculate highest expense for the month
+  const calculateHighestExpense = (data) =>
+    data.reduce((acc, cur) => {
+      const { expense } = cur;
+      return expense > acc ? expense : acc;
+    }, 0);
+
+  const [highestExpense] = useState(calculateHighestExpense(data));
+
   return (
     <>
+      <ChartCustom height={chartHeight} width={width}>
+        {expensesData.map((data, index) => {
+          const barHeight = data.expense;
+          return (
+            <Bar
+              key={data.name}
+              x={index * (barWidth + barMargin)}
+              y={chartHeight - barHeight}
+              width={barWidth}
+              height={barHeight}
+              expenseName={data.name}
+              highestExpense={highestExpense}
+            />
+          );
+        })}
+      </ChartCustom>
+
       {chartApi.map((data) => {
         return (
           <Row>

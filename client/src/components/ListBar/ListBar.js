@@ -39,7 +39,7 @@ function ListBar() {
         return (
           <Row>
             <div
-              key={index}
+              key={data}
               className={
                 // getOnPageChange === data
                 //   ? "list-bar list-bar--active"
@@ -57,7 +57,7 @@ function ListBar() {
         return (
           <Row>
             <div
-              key={index}
+              key={data}
               className={
                 urlStringFlash[1] === data
                   ? "list-bar list-bar--active"
