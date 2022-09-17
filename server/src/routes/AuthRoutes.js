@@ -15,7 +15,8 @@ router.patch(
   "/config/set/:codeAuth",
   AuthControllers.updateLayoutAuthControllerById
 );
-router.patch(
+
+router.put(
   "/config/reset/:codeAuth",
   AuthControllers.updateResetConfigAuthControllerById
 );

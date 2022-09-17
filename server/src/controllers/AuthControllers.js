@@ -41,11 +41,9 @@ exports.updateResetConfigAuthControllerById = async (req, res) => {
     { codeAuth: req.params.codeAuth },
     {
       $set: {
-        layout: {
-          tags: ["Medical", "Supplier", "Unit", "User"],
-          chart: ["STAVW_0001", "STAVW_0002", "STAVW_0003", "STAVW_0004"],
-          content: [2, 10],
-        },
+        tags: ["Medical", "Supplier", "Unit", "User"],
+        chart: ["STAVW_0001", "STAVW_0002", "STAVW_0003", "STAVW_0004"],
+        content: [2, 10],
       },
     }
   );
@@ -66,11 +64,9 @@ exports.createAuthController = (req, res) => {
     username: req.body.username,
     password: req.body.password,
     permission: req.body.permission,
-    layout: {
-      tags: ["Medical", "Supplier", "Unit", "User"],
-      chart: ["STAVW_0001", "STAVW_0002", "STAVW_0003", "STAVW_0004"],
-      content: [2, 10],
-    },
+    tags: ["Medical", "Supplier", "Unit", "User"],
+    chart: ["STAVW_0001", "STAVW_0002", "STAVW_0003", "STAVW_0004"],
+    content: [2, 10],
   });
 
   createAuth

@@ -5,11 +5,9 @@ const AuthShema = new mongoose.Schema({
   username: { type: String, required: true },
   password: { type: String, required: true },
   permission: { type: Number, required: true },
-  layout: {
-    tags: [String],
-    chart: [String],
-    content: [Number],
-  },
+  tags: [String],
+  chart: [String],
+  content: [Number],
   createdAt: { type: Date, default: Date.now() },
 });
 
