@@ -10,10 +10,24 @@ const dataToBase64 = {
 };
 
 const configKind = { kind: "user_gui", user_id: 1 };
+const apiStatistic = [
+  {
+    code: "code",
+    value: "sta_0032",
+  },
+  {
+    code: "from",
+    value: "2022-09-20",
+  },
+  {
+    code: "to",
+    value: "2022-09-21",
+  },
+]
 
 const parseToBase64 = (params) => {
   let stringBase64 = buffer.from(JSON.stringify(params)).toString("base64");
   return stringBase64;
 };
 
-console.log(parseToBase64(configKind));
+console.log(parseToBase64(apiStatistic));
