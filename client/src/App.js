@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Container from "react-bootstrap/Container";
@@ -11,10 +11,17 @@ import PageApp from "./pages/PageApp";
 
 function App() {
   const [token] = useCookies("access-token");
+  const [checkToken, setCheckToken] = useState(false);
+  useEffect(() => {
+    const getToken = () => {
+      if (token["access-token"]) {
+        setCheckToken(true);
+      }
+    };
+    getToken();
+  }, [token]);
 
-  return (
-    <Container>{!token["access-token"] ? <Login /> : <PageApp />}</Container>
-  );
+  return <Container>{!checkToken ? <Login /> : <PageApp />}</Container>;
 }
 
 export default App;

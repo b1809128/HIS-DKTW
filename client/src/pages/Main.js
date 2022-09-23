@@ -3,7 +3,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import CalendarComponent from "../components/Calendar/Calendar";
 import Tags from "../components/Tags/Tags";
-import DoughnutChart from "../components/Chart/DoughnutChart";
+// import DoughnutChart from "../components/Chart/DoughnutChart";
 import LineChart from "../components/Chart/LineChart";
 import ColumnChart from "../components/Chart/ColumnChart";
 import MedicalTable from "../components/Table/MedicalTable";
@@ -14,6 +14,7 @@ import ReceiptTable from "../components/Table/ReceiptTable";
 
 import * as signalR from "@microsoft/signalr";
 import axios from "axios";
+import PieChart from "../components/Chart/PieChart";
 
 /**
  * 
@@ -46,7 +47,7 @@ function Main() {
 
   //TODO: Chart change content
   const [calendarItems, setCalendarItems] = useState([
-    <DoughnutChart />,
+    <PieChart />,
     <CalendarComponent />,
   ]);
 

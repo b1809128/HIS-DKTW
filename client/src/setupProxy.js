@@ -23,6 +23,13 @@ module.exports = function (app) {
     })
   );
   app.use(
+    "/api/statistic/data/*",
+    createProxyMiddleware({
+      target: "http://14.241.182.251:59325",
+      changeOrigin: true,
+    })
+  );
+  app.use(
     "/api/system/statistics/*",
     createProxyMiddleware({
       target: "http://14.241.182.251:57195",

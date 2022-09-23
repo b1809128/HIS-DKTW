@@ -21,7 +21,7 @@ function Configure() {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        axios.put("http://localhost:5000/api/auth/config/reset/dd_2");
+        axios.put("http://localhost:5000/api/auth/config/reset/usr1");
         Swal.fire("Saved!", "", "success");
         <Navigate to="/" />;
       } else if (result.isDenied) {
@@ -32,11 +32,11 @@ function Configure() {
 
   const configLayoutApp = () => {
     Swal.fire({
-      title: "Do you want to Reset Configure?",
+      title: "Do you want to Change Configure?",
       showDenyButton: true,
       showCancelButton: true,
-      confirmButtonText: "Reset",
-      denyButtonText: `Don't Reset`,
+      confirmButtonText: "Change",
+      denyButtonText: `Don't Change`,
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
@@ -55,19 +55,26 @@ function Configure() {
   };
   return (
     <>
-      <Row>
-        <p>Settings Position</p>
-        <select
-          value={idPosition}
-          onChange={(e) => setIdPosition(e.target.value)}
-        >
-          {configPosition.map((data) => {
-            return <option value={data.id}>{data.text}</option>;
-          })}
-        </select>
-        <Button variant="primary" onClick={configLayoutApp}>
-          Change
-        </Button>
+      <Row style={{ marginBottom: "20px" }}>
+        <div className="col-sm-4">
+          <p>Settings Position</p>
+          <div style={{ display: "flex" }}>
+            <select
+              value={idPosition}
+              onChange={(e) => setIdPosition(e.target.value)}
+              className="form-select"
+            >
+              {configPosition.map((data) => {
+                return <option value={data.id}>{data.text}</option>;
+              })}
+            </select>
+            <Button variant="primary" onClick={configLayoutApp}>
+              Change
+            </Button>
+          </div>
+        </div>
+        <div className="col-sm-4"></div>
+        <div className="col-sm-4"></div>
       </Row>
       <hr />
       <Button variant="primary" onClick={resetFunction}>

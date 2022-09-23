@@ -4,6 +4,7 @@
 }
 
 .navbar-logout{
+    margin: 0 10px;
     cursor: pointer;
     color: #000;
 }

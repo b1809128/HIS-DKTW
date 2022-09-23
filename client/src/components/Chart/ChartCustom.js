@@ -7,6 +7,7 @@ export default function ChartCustom({ children, width, height }) {
       width="100%"
       height="30%"
       preserveAspectRatio="xMidYMax meet"
+      style={{marginTop:"10px"}}
     >
       {children}
     </svg>

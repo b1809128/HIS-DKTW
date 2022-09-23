@@ -4,6 +4,9 @@ export const apiStatisticDaily =
 export const apiStatisticChartConfig =
   "/api/system/statistics/eyJraW5kIjoid2ViX2Rhc2hib2FyZF9jb25maWcifQ==";
 
+export const apiStatisticData =
+  "/api/Statistic/data/W3siY29kZSI6ImNvZGUiLCJ2YWx1ZSI6InN0YV8wMDMyIn0seyJjb2RlIjoiZnJvbSIsInZhbHVlIjoiMjAyMi0wOS0yMCJ9LHsiY29kZSI6InRvIiwidmFsdWUiOiIyMDIyLTA5LTIxIn1d";
+
 export const apiLoginGetToken = "/api/user/rdparty/login";
 
 export const rd_key =

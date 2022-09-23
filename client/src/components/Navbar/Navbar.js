@@ -3,6 +3,8 @@ import "./Navbar.css";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 // import { FiLogOut } from "react-icons/fi";
+import { useCookies } from "react-cookie";
+
 import Row from "react-bootstrap/esm/Row";
 const spanData = [
   { color: "#ea3433", text: "V" },
@@ -11,6 +13,11 @@ const spanData = [
   { color: "#00a85a", text: "D" },
 ];
 function NavbarComponent() {
+  const [removeCookie] = useCookies(["access-token"]);
+
+  const logOut = () => {
+    removeCookie(["access-token"]);
+  };
   return (
     <div className="navbar-wrapper">
       <Navbar>
@@ -39,7 +46,9 @@ function NavbarComponent() {
               <Navbar.Text>
                 <span>Signed in as:</span> <a href="/sign-in">Admin</a>
               </Navbar.Text>
-              {/* <FiLogOut className="navbar-logout" /> */}
+              <span onClick={logOut} className="navbar-logout">
+                Log Out
+              </span>
             </Navbar.Collapse>
           </Row>
         </Container>
