@@ -13,7 +13,7 @@ const configKind = { kind: "user_gui", user_id: 1 };
 const apiStatistic = [
   {
     code: "code",
-    value: "sta_0032",
+    value: "sta_0040",
   },
   {
     code: "from",
