@@ -3,17 +3,31 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import React, { useState, useEffect } from "react";
 import { Pie } from "react-chartjs-2";
 import "./Chart.css";
-import { apiStatisticData } from "../token/authorize";
+import {
+  apiStatisticDataSTAVW_0001,
+  apiStatisticDataSTAVW_0002,
+  apiStatisticDataSTAVW_0003,
+} from "../token/authorize";
 import { useCookies } from "react-cookie";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-function PieChart({ height }) {
+function PieChart({ dataCode, dataDisplay }) {
   const [apiData, setApiData] = useState([]);
   const [token] = useCookies(["access-token"]);
+  let apiURL;
+  if (dataCode === "STAVW_0001") {
+    apiURL = apiStatisticDataSTAVW_0001;
+  }
+  if (dataCode === "STAVW_0002") {
+    apiURL = apiStatisticDataSTAVW_0002;
+  }
+  if (dataCode === "STAVW_0003") {
+    apiURL = apiStatisticDataSTAVW_0003;
+  }
   useEffect(() => {
     const getAPI = async () => {
       await axios
-        .get(apiStatisticData, {
+        .get(apiURL, {
           headers: {
             token: token["access-token"],
           },
@@ -24,7 +38,7 @@ function PieChart({ height }) {
         .catch((err) => console.log(err));
     };
     getAPI();
-  }, [token]);
+  }, [apiURL, token]);
 
   let labelsArray = apiData.map((data) => data.display);
   let dataArray = apiData.map((data) => data.elements[0].value);
@@ -57,9 +71,9 @@ function PieChart({ height }) {
     ],
   };
   return (
-    <div className="chart-div" style={{ height: height }}>
+    <div className="chart-div">
       <Pie data={data} />
-      <p style={{ textAlign: "center" }}>Biểu đồ </p>
+      <p style={{ textAlign: "center", fontWeight:500, fontSize: "0.8rem" }}>{dataDisplay}</p>
     </div>
   );
 }

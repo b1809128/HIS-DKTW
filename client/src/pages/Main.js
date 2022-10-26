@@ -5,7 +5,6 @@ import CalendarComponent from "../components/Calendar/Calendar";
 import Tags from "../components/Tags/Tags";
 // import DoughnutChart from "../components/Chart/DoughnutChart";
 import LineChart from "../components/Chart/LineChart";
-import ColumnChart from "../components/Chart/ColumnChart";
 import MedicalTable from "../components/Table/MedicalTable";
 import SupplierTable from "../components/Table/SupplierTable";
 import Aos from "aos";
@@ -15,6 +14,7 @@ import ReceiptTable from "../components/Table/ReceiptTable";
 import * as signalR from "@microsoft/signalr";
 import axios from "axios";
 import PieChart from "../components/Chart/PieChart";
+import { FlexBar } from "../components/Chart/FlexBar";
 
 /**
  * 
@@ -47,13 +47,17 @@ function Main() {
 
   //TODO: Chart change content
   const [calendarItems, setCalendarItems] = useState([
-    <PieChart />,
+    <PieChart
+      dataCode="STAVW_0001"
+      dataDisplay="Cấu hình dữ liệu tiếp đón trên dashboard"
+    />,
+
     <CalendarComponent />,
   ]);
 
   const [chartItems, setChartItems] = useState([
+    <FlexBar dataCode="STAVW_0003" dataDisplay="Cấu hình dữ liệu phòng khám" />,
     <LineChart />,
-    <ColumnChart />,
   ]);
 
   let dragItems = useRef(null);

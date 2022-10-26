@@ -15,7 +15,7 @@ function Login() {
         rd_key: rd_key,
       },
     });
-    setToken("access-token", res.data.value.token, { path: "/", maxAge: 60 });
+    setToken("access-token", res.data.value.token, { path: "/", maxAge: 1200 });
     if (res.data.value.token) {
       window.location.replace("/");
     }
