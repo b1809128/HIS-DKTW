@@ -30,7 +30,7 @@ function ChartAPI() {
 
   return (
     <>
-      <Row style={{ display: "flex" }}>
+      <Row style={{ display: "flex", justifyContent: "center" }}>
         {chartApi.map((data) => {
           return (
             <>

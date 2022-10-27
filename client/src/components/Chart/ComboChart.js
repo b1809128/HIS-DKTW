@@ -39,8 +39,6 @@ export function ComboChart({ dataCode, dataDisplay }) {
 
   const options = {
     title: dataDisplay,
-    vAxis: { title: "Cups" },
-    hAxis: { title: "Month" },
     seriesType: "bars",
     series: { 4: { type: "line" } },
   };
